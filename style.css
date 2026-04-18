@@ -408,6 +408,14 @@ body {
   transform: scale(1.05);
 }
 
+#menu-lateral {
+  left: -300px; /* oculto */
+  transition: 0.3s;
+}
+
+#menu-lateral.active {
+  left: 0; /* aparece */
+}
 
 #cerrar {
   position: relative;
