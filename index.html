@@ -14,6 +14,18 @@
 <!-- MENÚ LATERAL -->
 <div id="menu-lateral">
 
+    <script>
+function abrirMenu() {
+  document.getElementById("menu-lateral").classList.add("active");
+  document.getElementById("overlay").classList.add("active");
+}
+
+function cerrarMenu() {
+  document.getElementById("menu-lateral").classList.remove("active");
+  document.getElementById("overlay").classList.remove("active");
+}
+    </script>
+
   <div class="menu-header">
     <h3>Iniciar sesión</h3>
     <span onclick="cerrarMenu()">✖</span>
@@ -26,6 +38,9 @@
     <h4>Promociones</h4>
     <li>Promos para 1</li>
     <li>Promos Grupales</li>
+    <li>Yape Promos</li>
+
+
 
     <h4>Carta</h4>
     <li><a href=#Platillos onclick="cerrarMenu()"> Platillos</a></li>
