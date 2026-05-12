@@ -204,9 +204,7 @@ botonesCarrito.forEach(boton => {
       producto.querySelector(".price").innerText;
 
     const precio = parseFloat(
-      precioTexto
-        .replace("S/", "")
-        .trim()
+      precioTexto.replace("S/", "").trim()
     );
 
     total += precio;
