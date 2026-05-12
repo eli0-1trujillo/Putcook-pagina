@@ -72,51 +72,6 @@ function cerrarMenu() {
   document.getElementById("overlay").classList.remove("active");
 }
 
-function abrirMenu() {
-  document.getElementById("menu-lateral").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
-}
-
-function cerrarMenu() {
-  document.getElementById("menu-lateral").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
-}
-
-const buscador = document.getElementById("buscador");
-const productos = document.querySelectorAll(".box");
-
-buscador.addEventListener("keyup", function() {
-  const texto = buscador.value.toLowerCase();
-
-  productos.forEach(producto => {
-    const nombre = producto.textContent.toLowerCase();
-
-    if (nombre.includes(texto)) {
-      producto.style.display = "block";
-    } else {
-      producto.style.display = "none";
-    }
-  });
-});
-
-const buscador = document.getElementById("buscador");
-const productos = document.querySelectorAll(".box");
-const mensaje = document.getElementById("no-resultados");
-
-buscador.addEventListener("keyup", function() {
-  const texto = buscador.value.toLowerCase();
-  let encontrados = 0;
-
-  productos.forEach(producto => {
-    const nombre = producto.textContent.toLowerCase();
-
-    if (nombre.includes(texto)) {
-      producto.style.display = "block";
-      encontrados++;
-    } else {
-      producto.style.display = "none";
-    }
-  });
 
   if (encontrados === 0) {
     mensaje.style.display = "block";
