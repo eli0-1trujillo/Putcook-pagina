@@ -198,3 +198,40 @@ botonesCarrito.forEach(boton => {
   });
 
 });
+
+// ======================================
+// CARRITO
+// ======================================
+
+let total = 0;
+
+const carrito = document.querySelector(".cart");
+
+const botonesCarrito =
+  document.querySelectorAll(".add-to-cart");
+
+botonesCarrito.forEach(boton => {
+
+  boton.addEventListener("click", () => {
+
+    const producto =
+      boton.parentElement;
+
+    const precioTexto =
+      producto.querySelector(".price").innerText;
+
+    // SACAR SOLO EL NÚMERO
+    const precio = parseFloat(
+      precioTexto.replace("S/", "").trim()
+    );
+
+    // SUMAR TOTAL
+    total += precio;
+
+    // ACTUALIZAR CARRITO
+    carrito.innerText =
+      `🛒 S/ ${total.toFixed(2)}`;
+
+  });
+
+});
