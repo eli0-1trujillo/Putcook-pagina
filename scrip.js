@@ -30,6 +30,28 @@ buscador.addEventListener("keyup", () => {
 
 });
 
+buscador.addEventListener("keypress", function(event) {
+
+  if (event.key === "Enter") {
+
+    event.preventDefault();
+
+    const primerProducto =
+      document.querySelector(".box:not([style*='none'])");
+
+    if (primerProducto) {
+
+      primerProducto.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+
+    }
+
+  }
+
+});
+
 tipoDoc.addEventListener('change', function() {
 
     if (this.value === 'dni') {
