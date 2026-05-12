@@ -1,98 +1,53 @@
-// ======================================
-// FORMULARIO DOCUMENTO
-// ======================================
+document.addEventListener("DOMContentLoaded", () => {
 
-const tipoDoc = document.getElementById("tipoDoc");
-const numDoc = document.getElementById("numDoc");
+  // ======================================
+  // FORMULARIO DOCUMENTO
+  // ======================================
 
-if (tipoDoc && numDoc) {
+  const tipoDoc = document.getElementById("tipoDoc");
+  const numDoc = document.getElementById("numDoc");
 
-  tipoDoc.addEventListener("change", function () {
+  if (tipoDoc && numDoc) {
 
-    if (this.value === "dni") {
+    tipoDoc.addEventListener("change", function () {
 
-      numDoc.placeholder = "Número de DNI";
-      numDoc.maxLength = 8;
+      if (this.value === "dni") {
 
-    } else {
-
-      numDoc.placeholder = "Número de CE";
-      numDoc.maxLength = 12;
-
-    }
-
-    numDoc.value = "";
-
-  });
-
-  // SOLO NÚMEROS
-  numDoc.addEventListener("input", function () {
-
-    this.value = this.value.replace(/[^0-9]/g, "");
-
-  });
-
-}
-
-
-// ======================================
-// BUSCADOR
-// ======================================
-
-const buscador = document.getElementById("buscador");
-
-if (buscador) {
-
-  buscador.addEventListener("keyup", () => {
-
-    const texto = buscador.value.toLowerCase();
-
-    const productos =
-      document.querySelectorAll(".box");
-
-    productos.forEach(producto => {
-
-      const nombre = producto
-        .querySelector("h3")
-        .innerText
-        .toLowerCase();
-
-      if (nombre.includes(texto)) {
-
-        producto.style.display = "";
+        numDoc.placeholder = "Número de DNI";
+        numDoc.maxLength = 8;
 
       } else {
 
-        producto.style.display = "none";
+        numDoc.placeholder = "Número de CE";
+        numDoc.maxLength = 12;
 
       }
 
+      numDoc.value = "";
+
     });
 
-  });
+    numDoc.addEventListener("input", function () {
 
-}
+      this.value = this.value.replace(/[^0-9]/g, "");
+
+    });
+
+  }
 
 
-// ======================================
-// ENTER BUSCADOR
-// ======================================
+  // ======================================
+  // BUSCADOR
+  // ======================================
 
-if (buscador) {
+  const buscador = document.getElementById("buscador");
+  const productos = document.querySelectorAll(".box");
 
-  buscador.addEventListener("keydown", function(event) {
+  if (buscador) {
 
-    if (event.key === "Enter") {
+    buscador.addEventListener("input", () => {
 
-      event.preventDefault();
-
-      const texto =
-        buscador.value.toLowerCase();
-
-      const productos =
-        document.querySelectorAll(".box");
-
-      let encontrado = false;
+      const texto = buscador.value.toLowerCase();
 
       productos.forEach(producto => {
 
@@ -101,39 +56,139 @@ if (buscador) {
           .innerText
           .toLowerCase();
 
-        if (nombre === texto) {
+        if (nombre.includes(texto)) {
 
-          producto.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-          });
+          producto.style.display = "flex";
 
-          producto.style.border =
-            "3px solid red";
+        } else {
 
-          setTimeout(() => {
-
-            producto.style.border = "";
-
-          }, 2000);
-
-          encontrado = true;
+          producto.style.display = "none";
 
         }
 
       });
 
-      if (!encontrado) {
+    });
 
-        alert("Producto no encontrado");
+    buscador.addEventListener("keydown", (event) => {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        const texto =
+          buscador.value.toLowerCase().trim();
+
+        let encontrado = false;
+
+        productos.forEach(producto => {
+
+          const nombre = producto
+            .querySelector("h3")
+            .innerText
+            .toLowerCase();
+
+          if (nombre === texto) {
+
+            producto.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+
+            producto.style.border =
+              "3px solid red";
+
+            setTimeout(() => {
+
+              producto.style.border = "none";
+
+            }, 2000);
+
+            encontrado = true;
+
+          }
+
+        });
+
+        if (!encontrado) {
+
+          alert("Producto no encontrado");
+
+        }
 
       }
 
-    }
+    });
+
+  }
+
+
+  // ======================================
+  // CARRITO
+  // ======================================
+
+  let total = 0;
+
+  const carrito =
+    document.getElementById("cart-total");
+
+  const botonesCarrito =
+    document.querySelectorAll(".add-to-cart");
+
+  botonesCarrito.forEach(boton => {
+
+    boton.addEventListener("click", () => {
+
+      const producto =
+        boton.closest(".box");
+
+      const precioTexto =
+        producto.querySelector(".price").innerText;
+
+      const precio = parseFloat(
+        precioTexto.replace("S/", "").trim()
+      );
+
+      total += precio;
+
+      carrito.innerText =
+        `🛒 S/ ${total.toFixed(2)}`;
+
+    });
 
   });
 
+});
+
+
+// ======================================
+// MENÚ LATERAL
+// ======================================
+
+function abrirMenu() {
+
+  document
+    .getElementById("menu-lateral")
+    .classList.add("active");
+
+  document
+    .getElementById("overlay")
+    .classList.add("active");
+
 }
+
+function cerrarMenu() {
+
+  document
+    .getElementById("menu-lateral")
+    .classList.remove("active");
+
+  document
+    .getElementById("overlay")
+    .classList.remove("active");
+
+}
+
 
 // ======================================
 // SCROLL PRODUCTOS
@@ -160,70 +215,5 @@ function scrollRightCustom(btn) {
     left: 200,
     behavior: "smooth"
   });
-
-}
-
-// ======================================
-// CARRITO
-// ======================================
-
-let total = 0;
-
-const carrito =
-  document.getElementById("cart-total");
-
-const botonesCarrito =
-  document.querySelectorAll(".add-to-cart");
-
-botonesCarrito.forEach(boton => {
-
-  boton.addEventListener("click", () => {
-
-    const producto =
-      boton.closest(".box");
-
-    const precioTexto =
-      producto.querySelector(".price").innerText;
-
-    const precio = parseFloat(
-      precioTexto.replace("S/", "").trim()
-    );
-
-    total += precio;
-
-    carrito.innerText =
-      `🛒 S/ ${total.toFixed(2)}`;
-
-  });
-
-});
-
-// ======================================
-// MENÚ LATERAL
-// ======================================
-
-function abrirMenu() {
-
-  const menu =
-    document.getElementById("menu-lateral");
-
-  const overlay =
-    document.getElementById("overlay");
-
-  menu.classList.add("active");
-  overlay.classList.add("active");
-
-}
-
-function cerrarMenu() {
-
-  const menu =
-    document.getElementById("menu-lateral");
-
-  const overlay =
-    document.getElementById("overlay");
-
-  menu.classList.remove("active");
-  overlay.classList.remove("active");
 
 }
