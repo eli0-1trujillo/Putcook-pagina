@@ -23,7 +23,6 @@ tipoDoc.addEventListener("change", function () {
 
 });
 
-// SOLO NÚMEROS
 numDoc.addEventListener("input", function () {
 
   this.value = this.value.replace(/[^0-9]/g, "");
@@ -31,17 +30,18 @@ numDoc.addEventListener("input", function () {
 });
 
 
-
-/* =========================
-   BUSCADOR
-========================= */
+// ======================================
+// BUSCADOR
+// ======================================
 
 const buscador = document.getElementById("buscador");
 
 buscador.addEventListener("keyup", () => {
 
   const texto = buscador.value.toLowerCase();
-  const productos = document.querySelectorAll(".box");
+
+  const productos =
+    document.querySelectorAll(".box");
 
   productos.forEach(producto => {
 
@@ -51,16 +51,23 @@ buscador.addEventListener("keyup", () => {
       .toLowerCase();
 
     if (nombre.includes(texto)) {
+
       producto.style.display = "";
+
     } else {
+
       producto.style.display = "none";
+
     }
 
   });
 
 });
 
-/* ENTER = IR AL PRODUCTO EXACTO */
+
+// ======================================
+// ENTER BUSCADOR
+// ======================================
 
 buscador.addEventListener("keydown", function(event) {
 
@@ -68,8 +75,11 @@ buscador.addEventListener("keydown", function(event) {
 
     event.preventDefault();
 
-    const texto = buscador.value.toLowerCase();
-    const productos = document.querySelectorAll(".box");
+    const texto =
+      buscador.value.toLowerCase();
+
+    const productos =
+      document.querySelectorAll(".box");
 
     let encontrado = false;
 
@@ -87,24 +97,31 @@ buscador.addEventListener("keydown", function(event) {
           block: "center"
         });
 
-        producto.style.border = "3px solid red";
+        producto.style.border =
+          "3px solid red";
 
         setTimeout(() => {
+
           producto.style.border = "";
+
         }, 2000);
 
         encontrado = true;
+
       }
 
     });
 
     if (!encontrado) {
+
       alert("Producto no encontrado");
+
     }
 
   }
 
 });
+
 
 // ======================================
 // MENÚ LATERAL
@@ -135,7 +152,6 @@ function cerrarMenu() {
 }
 
 
-
 // ======================================
 // SCROLL PRODUCTOS
 // ======================================
@@ -164,48 +180,15 @@ function scrollRightCustom(btn) {
 
 }
 
+
 // ======================================
 // CARRITO
 // ======================================
 
-const botonesCarrito =
-  document.querySelectorAll(".add-to-cart");
+let total = 0;
 
-const carritoVisual =
+const carrito =
   document.querySelector(".cart");
-
-let total = 0;
-
-botonesCarrito.forEach(boton => {
-
-  boton.addEventListener("click", () => {
-
-    const producto =
-      boton.closest(".box");
-
-    const precioTexto =
-      producto.querySelector(".price").innerText;
-
-    const precio = parseFloat(
-      precioTexto.replace("S/", "")
-    );
-
-    total += precio;
-
-    carritoVisual.innerText =
-      `🛒 S/ ${total.toFixed(2)}`;
-
-  });
-
-});
-
-// ======================================
-// CARRITO
-// ======================================
-
-let total = 0;
-
-const carrito = document.querySelector(".cart");
 
 const botonesCarrito =
   document.querySelectorAll(".add-to-cart");
@@ -220,15 +203,14 @@ botonesCarrito.forEach(boton => {
     const precioTexto =
       producto.querySelector(".price").innerText;
 
-    // SACAR SOLO EL NÚMERO
     const precio = parseFloat(
-      precioTexto.replace("S/", "").trim()
+      precioTexto
+        .replace("S/", "")
+        .trim()
     );
 
-    // SUMAR TOTAL
     total += precio;
 
-    // ACTUALIZAR CARRITO
     carrito.innerText =
       `🛒 S/ ${total.toFixed(2)}`;
 
