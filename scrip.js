@@ -1,3 +1,5 @@
+console.log("JS FUNCIONANDO");
+
 document.addEventListener("DOMContentLoaded", () => {
 
   // ======================================
@@ -188,7 +190,6 @@ function cerrarMenu() {
     .classList.remove("active");
 
 }
-
 
 // ======================================
 // SCROLL PRODUCTOS
