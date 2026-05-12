@@ -5,29 +5,34 @@
 const tipoDoc = document.getElementById("tipoDoc");
 const numDoc = document.getElementById("numDoc");
 
-tipoDoc.addEventListener("change", function () {
+if (tipoDoc && numDoc) {
 
-  if (this.value === "dni") {
+  tipoDoc.addEventListener("change", function () {
 
-    numDoc.placeholder = "Número de DNI";
-    numDoc.maxLength = 8;
+    if (this.value === "dni") {
 
-  } else {
+      numDoc.placeholder = "Número de DNI";
+      numDoc.maxLength = 8;
 
-    numDoc.placeholder = "Número de CE";
-    numDoc.maxLength = 12;
+    } else {
 
-  }
+      numDoc.placeholder = "Número de CE";
+      numDoc.maxLength = 12;
 
-  numDoc.value = "";
+    }
 
-});
+    numDoc.value = "";
 
-numDoc.addEventListener("input", function () {
+  });
 
-  this.value = this.value.replace(/[^0-9]/g, "");
+  // SOLO NÚMEROS
+  numDoc.addEventListener("input", function () {
 
-});
+    this.value = this.value.replace(/[^0-9]/g, "");
+
+  });
+
+}
 
 
 // ======================================
@@ -36,52 +41,14 @@ numDoc.addEventListener("input", function () {
 
 const buscador = document.getElementById("buscador");
 
-buscador.addEventListener("keyup", () => {
+if (buscador) {
 
-  const texto = buscador.value.toLowerCase();
+  buscador.addEventListener("keyup", () => {
 
-  const productos =
-    document.querySelectorAll(".box");
-
-  productos.forEach(producto => {
-
-    const nombre = producto
-      .querySelector("h3")
-      .innerText
-      .toLowerCase();
-
-    if (nombre.includes(texto)) {
-
-      producto.style.display = "";
-
-    } else {
-
-      producto.style.display = "none";
-
-    }
-
-  });
-
-});
-
-
-// ======================================
-// ENTER BUSCADOR
-// ======================================
-
-buscador.addEventListener("keydown", function(event) {
-
-  if (event.key === "Enter") {
-
-    event.preventDefault();
-
-    const texto =
-      buscador.value.toLowerCase();
+    const texto = buscador.value.toLowerCase();
 
     const productos =
       document.querySelectorAll(".box");
-
-    let encontrado = false;
 
     productos.forEach(producto => {
 
@@ -90,37 +57,83 @@ buscador.addEventListener("keydown", function(event) {
         .innerText
         .toLowerCase();
 
-      if (nombre === texto) {
+      if (nombre.includes(texto)) {
 
-        producto.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
+        producto.style.display = "";
 
-        producto.style.border =
-          "3px solid red";
+      } else {
 
-        setTimeout(() => {
-
-          producto.style.border = "";
-
-        }, 2000);
-
-        encontrado = true;
+        producto.style.display = "none";
 
       }
 
     });
 
-    if (!encontrado) {
+  });
 
-      alert("Producto no encontrado");
+}
+
+
+// ======================================
+// ENTER BUSCADOR
+// ======================================
+
+if (buscador) {
+
+  buscador.addEventListener("keydown", function(event) {
+
+    if (event.key === "Enter") {
+
+      event.preventDefault();
+
+      const texto =
+        buscador.value.toLowerCase();
+
+      const productos =
+        document.querySelectorAll(".box");
+
+      let encontrado = false;
+
+      productos.forEach(producto => {
+
+        const nombre = producto
+          .querySelector("h3")
+          .innerText
+          .toLowerCase();
+
+        if (nombre === texto) {
+
+          producto.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
+
+          producto.style.border =
+            "3px solid red";
+
+          setTimeout(() => {
+
+            producto.style.border = "";
+
+          }, 2000);
+
+          encontrado = true;
+
+        }
+
+      });
+
+      if (!encontrado) {
+
+        alert("Producto no encontrado");
+
+      }
 
     }
 
-  }
+  });
 
-});
+}
 
 
 // ======================================
@@ -198,7 +211,7 @@ botonesCarrito.forEach(boton => {
   boton.addEventListener("click", () => {
 
     const producto =
-      boton.parentElement;
+      boton.closest(".box");
 
     const precioTexto =
       producto.querySelector(".price").innerText;
