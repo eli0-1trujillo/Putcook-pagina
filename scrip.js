@@ -163,3 +163,38 @@ function scrollRightCustom(btn) {
   });
 
 }
+
+// ======================================
+// CARRITO
+// ======================================
+
+const botonesCarrito =
+  document.querySelectorAll(".add-to-cart");
+
+const carritoVisual =
+  document.querySelector(".cart");
+
+let total = 0;
+
+botonesCarrito.forEach(boton => {
+
+  boton.addEventListener("click", () => {
+
+    const producto =
+      boton.closest(".box");
+
+    const precioTexto =
+      producto.querySelector(".price").innerText;
+
+    const precio = parseFloat(
+      precioTexto.replace("S/", "")
+    );
+
+    total += precio;
+
+    carritoVisual.innerText =
+      `🛒 S/ ${total.toFixed(2)}`;
+
+  });
+
+});
