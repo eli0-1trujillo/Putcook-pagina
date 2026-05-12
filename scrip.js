@@ -1,5 +1,40 @@
-const tipoDoc = document.getElementById('tipoDoc');
-const numDoc = document.getElementById('numDoc');
+// ======================================
+// FORMULARIO DOCUMENTO
+// ======================================
+
+const tipoDoc = document.getElementById("tipoDoc");
+const numDoc = document.getElementById("numDoc");
+
+tipoDoc.addEventListener("change", function () {
+
+  if (this.value === "dni") {
+
+    numDoc.placeholder = "Número de DNI";
+    numDoc.maxLength = 8;
+
+  } else {
+
+    numDoc.placeholder = "Número de CE";
+    numDoc.maxLength = 12;
+
+  }
+
+  numDoc.value = "";
+
+});
+
+// SOLO NÚMEROS
+numDoc.addEventListener("input", function () {
+
+  this.value = this.value.replace(/[^0-9]/g, "");
+
+});
+
+
+
+// ======================================
+// BUSCADOR
+// ======================================
 
 const buscador = document.getElementById("buscador");
 
@@ -18,7 +53,7 @@ buscador.addEventListener("keyup", () => {
 
     if (nombre.includes(texto)) {
 
-      producto.style.display = "";
+      producto.style.display = "flex";
 
     } else {
 
@@ -30,7 +65,8 @@ buscador.addEventListener("keyup", () => {
 
 });
 
-buscador.addEventListener("keypress", function(event) {
+// ENTER = IR AL PRIMER PRODUCTO
+buscador.addEventListener("keypress", function (event) {
 
   if (event.key === "Enter") {
 
@@ -52,87 +88,62 @@ buscador.addEventListener("keypress", function(event) {
 
 });
 
-tipoDoc.addEventListener('change', function() {
 
-    if (this.value === 'dni') {
 
-        numDoc.placeholder = "Número de DNI";
-        numDoc.maxLength = 8;
-        numDoc.value = "";
-
-    } else {
-
-        numDoc.placeholder = "Número de CE";
-        numDoc.maxLength = 12;
-        numDoc.value = "";
-
-    }
-
-});
-
-numDoc.addEventListener('input', function() {
-
-    this.value = this.value.replace(/[^0-9]/g, '');
-
-});
-
-function openModal() {
-
-  document.getElementById("modal").style.display = "block";
-
-}
-
-function closeModal() {
-
-  document.getElementById("modal").style.display = "none";
-
-}
-
-window.onclick = function(event) {
-
-  let menu = document.getElementById("menu");
-
-  if (event.target === menu) {
-
-    menu.classList.remove("abierto");
-
-  }
-
-}
+// ======================================
+// MENÚ LATERAL
+// ======================================
 
 function abrirMenu() {
 
-  document.getElementById("menu-lateral").classList.add("active");
-  document.getElementById("overlay").classList.add("active");
+  document
+    .getElementById("menu-lateral")
+    .classList.add("active");
+
+  document
+    .getElementById("overlay")
+    .classList.add("active");
 
 }
 
 function cerrarMenu() {
 
-  document.getElementById("menu-lateral").classList.remove("active");
-  document.getElementById("overlay").classList.remove("active");
+  document
+    .getElementById("menu-lateral")
+    .classList.remove("active");
+
+  document
+    .getElementById("overlay")
+    .classList.remove("active");
 
 }
 
+
+
+// ======================================
+// SCROLL PRODUCTOS
+// ======================================
+
 function scrollLeftCustom(btn) {
 
-  const container = btn.parentElement.querySelector('.box-container');
+  const container =
+    btn.parentElement.querySelector(".box-container");
 
   container.scrollBy({
     left: -200,
-    behavior: 'smooth'
+    behavior: "smooth"
   });
 
 }
 
 function scrollRightCustom(btn) {
 
-  const container = btn.parentElement.querySelector('.box-container');
+  const container =
+    btn.parentElement.querySelector(".box-container");
 
   container.scrollBy({
     left: 200,
-    behavior: 'smooth'
+    behavior: "smooth"
   });
 
 }
-```
