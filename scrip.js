@@ -17,7 +17,7 @@ buscador.addEventListener("keyup", () => {
       .toLowerCase();
 
     if (nombre.includes(texto)) {
-      producto.style.display = "block";
+      producto.style.display = "";
     } else {
       producto.style.display = "none";
     }
@@ -44,8 +44,6 @@ numDoc.addEventListener('input', function() {
 });
 
 
-element.parentElement.querySelector(".box-container")
-
 function openModal() {
   document.getElementById("modal").style.display = "block";
 }
@@ -71,14 +69,6 @@ function cerrarMenu() {
   document.getElementById("menu-lateral").classList.remove("active");
   document.getElementById("overlay").classList.remove("active");
 }
-
-
-  if (encontrados === 0) {
-    mensaje.style.display = "block";
-  } else {
-    mensaje.style.display = "none";
-  }
-});
 
 
 function scrollLeftCustom(btn) {
