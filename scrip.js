@@ -135,36 +135,6 @@ if (buscador) {
 
 }
 
-
-// ======================================
-// MENÚ LATERAL
-// ======================================
-
-function abrirMenu() {
-
-  document
-    .getElementById("menu-lateral")
-    .classList.add("active");
-
-  document
-    .getElementById("overlay")
-    .classList.add("active");
-
-}
-
-function cerrarMenu() {
-
-  document
-    .getElementById("menu-lateral")
-    .classList.remove("active");
-
-  document
-    .getElementById("overlay")
-    .classList.remove("active");
-
-}
-
-
 // ======================================
 // SCROLL PRODUCTOS
 // ======================================
@@ -192,7 +162,6 @@ function scrollRightCustom(btn) {
   });
 
 }
-
 
 // ======================================
 // CARRITO
@@ -228,3 +197,33 @@ botonesCarrito.forEach(boton => {
   });
 
 });
+
+// ======================================
+// MENÚ LATERAL
+// ======================================
+
+function abrirMenu() {
+
+  const menu =
+    document.getElementById("menu-lateral");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  menu.classList.add("active");
+  overlay.classList.add("active");
+
+}
+
+function cerrarMenu() {
+
+  const menu =
+    document.getElementById("menu-lateral");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  menu.classList.remove("active");
+  overlay.classList.remove("active");
+
+}
