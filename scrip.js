@@ -1,6 +1,31 @@
 const tipoDoc = document.getElementById('tipoDoc');
 const numDoc = document.getElementById('numDoc');
 
+const buscador = document.getElementById("buscador");
+
+buscador.addEventListener("keyup", () => {
+
+  const texto = buscador.value.toLowerCase();
+
+  const productos = document.querySelectorAll(".box");
+
+  productos.forEach(producto => {
+
+    const nombre = producto
+      .querySelector("h3")
+      .innerText
+      .toLowerCase();
+
+    if (nombre.includes(texto)) {
+      producto.style.display = "block";
+    } else {
+      producto.style.display = "none";
+    }
+
+  });
+
+});
+
 tipoDoc.addEventListener('change', function() {
     if (this.value === 'dni') {
         numDoc.placeholder = "Número de DNI";
