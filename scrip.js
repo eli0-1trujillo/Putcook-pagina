@@ -188,7 +188,7 @@ function scrollRightCustom(btn) {
 let total = 0;
 
 const carrito =
-  document.querySelector(".cart");
+  document.getElementById("cart-total");
 
 const botonesCarrito =
   document.querySelectorAll(".add-to-cart");
